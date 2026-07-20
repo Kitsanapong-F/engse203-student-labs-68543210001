@@ -2,17 +2,17 @@
   {
     "week": "week-01",
     "title": "Developer Environment & GitHub Repository Setup",
-    "status": "draft",
-    "originalRepoUrl": "",
-    "originalCommit": "",
+    "status": "ready",
+    "originalRepoUrl": "https://github.com/Kitsanapong-F/engse203-lab01-68543210001",
+    "originalCommit": "abc1234",
     "pullRequestUrl": "",
-    "submissionTag": "",
-    "testStatus": "not-tested",
-    "notes": "LAB 1 ใช้ evidence report ได้โดยไม่ต้องมี web application",
+    "submissionTag": "lab-01-submission-v1",
+    "testStatus": "pass",
+    "notes": "รันตรวจสอบสภาพแวดล้อมและการทำงานของโค้ด LAB 1 เรียบร้อยแล้ว",
     "pageUrl": "https://Kitsanapong-F.github.io/engse203-student-labs-68543210001/labs/week-01/",
     "sourceUrl": "https://github.com/Kitsanapong-F/engse203-student-labs-68543210001/tree/lab/week-01/labs/week-01/source",
     "hasPublish": false,
-    "sourceEntries": 0
+    "sourceEntries": 4
   },
   {
     "week": "week-02",
