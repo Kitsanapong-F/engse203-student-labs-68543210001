@@ -1,11 +1,11 @@
 {
   "week": "week-04",
   "title": "React Components, Props, State และ Events",
-  "status": "ready",
+  "status": "submitted",
   "originalRepoUrl": "https://github.com/Kitsanapong-F/engse203-student-labs-68543210001",
   "originalCommit": "8b1186c",
   "pullRequestUrl": "https://github.com/Kitsanapong-F/engse203-student-labs-68543210001/pull/5",
-  "submissionTag": "",
-  "testStatus": "submitted",
+  "submissionTag": "lab-04-submission-v1",
+  "testStatus": "pass",
   "notes": "ตรวจ Test Evidence แล้ว"
 }
