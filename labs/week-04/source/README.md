@@ -8,9 +8,9 @@
 
 ## URLs
 
-- Repository: TODO
-- Pull Request: TODO
-- GitHub Pages: TODO
+- Repository: TODO https://github.com/Kitsanapong-F/engse203-student-labs-68543210001
+- Pull Request: TODO https://github.com/Kitsanapong-F/engse203-student-labs-68543210001/pull/5
+- GitHub Pages: TODO https://kitsanapong-f.github.io/engse203-student-labs-68543210001/
 
 ## Component Tree
 
