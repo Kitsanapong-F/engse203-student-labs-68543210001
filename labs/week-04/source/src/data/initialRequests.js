@@ -1,0 +1,58 @@
+export const initialRequests = [
+  {
+    id: 'REQ-001',
+    requesterName: 'สมชาย ใจดี',
+    requestType: 'แจ้งซ่อม',
+    location: 'ห้องปฏิบัติการ 301',
+    details: 'เครื่องปรับอากาศไม่ทำงาน',
+    priority: 'normal',
+    status: 'pending',
+  },
+  {
+    id: 'REQ-002',
+    requesterName: 'สุภาวดี รักเรียน',
+    requestType: 'บริการบัญชีผู้ใช้',
+    location: 'อาคารวิศวกรรมซอฟต์แวร์',
+    details: 'เข้าสู่ระบบห้องปฏิบัติการไม่ได้',
+    priority: 'normal',
+    status: 'progress',
+  },
+  {
+    id: 'REQ-003',
+    requesterName: 'กิตติพงษ์ ตั้งใจ',
+    requestType: 'ขอใช้ห้อง',
+    location: 'ห้องประชุม 2',
+    details: 'ขอใช้ห้องสำหรับกิจกรรมกลุ่มนักศึกษา',
+    priority: 'normal',
+    status: 'completed',
+  },
+
+ {
+    id: 'REQ-004',
+    requesterName: ' ยอดเยี่ยม ตั้งใจ',
+    requestType: 'แจ้งซ่อม',
+    location: 'อาคารปฏิบัติการทางวิศวกรรม ชั้น 2',
+    details: 'โปรเจคเตอร์ภายในห้องบรรยายไม่แสดงภาพ เชื่อมต่อสาย HDMI แล้วไม่มีสัญญาณ',
+    priority: 'urgent',
+    status: 'progress',
+  },
+  {
+    id: 'REQ-005',
+    requesterName: 'สมชาย ยอดเยี่ยม',
+    requestType: 'แจ้งซ่อม',
+    location: 'ห้องปฏิบัติการคอมพิวเตอร์',
+    details: 'แอร์ไม่เย็นและมีน้ำหยด ใกล้บริเวณจุดวางเซิร์ฟเวอร์',
+    priority: 'urgent',
+    status: 'pending',
+  },
+  {
+    id: 'REQ-006',
+    requesterName: 'วิลาวัณย์ สุขเกษม',
+    requestType: 'แจ้งทำความสะอาด',
+    location: 'อาคารวิศวกรรมศาสตร์ ชั้น 3',
+    details: 'ถังขยะบริเวณโถงทางเดินเต็ม ล้นออกมาด้านนอก',
+    priority: 'normal',
+    status: 'progress',
+  },
+];
+

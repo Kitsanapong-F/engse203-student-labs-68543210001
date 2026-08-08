@@ -1,40 +1,67 @@
 import { useState } from 'react';
-import { initialTasks } from './data/initialTasks.js';
 import AppHeader from './components/AppHeader.jsx';
 import SummaryPanel from './components/SummaryPanel.jsx';
-import TaskList from './components/TaskList.jsx';
+import RequestForm from './components/RequestForm.jsx';
 import FilterBar from './components/FilterBar.jsx';
+import RequestList from './components/RequestList.jsx';
+import { initialRequests } from './data/initialRequests.js';
 
 function App() {
-  const [tasks] = useState(initialTasks);
+  // TODO LAB4-R04: เปลี่ยน requests/statusFilter เป็น state
+  const [requests, setRequests] = useState(initialRequests);
   const [statusFilter, setStatusFilter] = useState('all');
 
+  // TODO LAB4-R04: คำนวณ summary เป็น derived data
   const summary = {
-    total: initialTasks.length,
-    todo: initialTasks.filter((task) => task.status === 'todo').length,
-    doing: initialTasks.filter((task) => task.status === 'doing').length,
-    done: initialTasks.filter((task) => task.status === 'done').length,
+    total: requests.length,
+    pending: requests.filter((req) => req.status === 'pending').length,
+    progress: requests.filter((req) => req.status === 'progress').length,
+    completed: requests.filter((req) => req.status === 'completed').length,
   };
-  const filteredTasks = statusFilter === 'all'
-    ? tasks
-    : tasks.filter((task) => task.status === statusFilter);
+
+  // TODO LAB4-R08: คำนวณ filteredRequests จาก requests + statusFilter
+  const filteredRequests = statusFilter === 'all' ? requests : requests.filter((req) => req.status === statusFilter);
+
+  function handleAddRequest(requestData) {
+    const nextId = String(requests.length + 1).padStart(3, '0');
+    const newRequest = {
+      id: `REQ-${nextId}`,
+      ...requestData,
+      status: 'pending'
+    };
+    setRequests((currentRequests) => [newRequest, ...currentRequests]);
+  }
+
+  function handleDeleteRequest(requestId) {
+   setRequests((currentRequests) => currentRequests.filter((Requests) => Requests.id !== requestId));
+  }
 
   return (
     <>
-      <AppHeader title="Study Task Board" subtitle="CP02 — Props, map และ stable key" />
+      <AppHeader
+        title="Campus Service Request"
+        subtitle="LAB 4 Starter — เปลี่ยน DOM-driven UI เป็น State-driven React UI"
+      />
       <main className="container page-content">
         <SummaryPanel summary={summary} />
-        <section className="panel">
-          <FilterBar value={statusFilter} onFilterChange={setStatusFilter} />
-          <TaskList tasks={initialTasks} />
-        </section>
+        <div className="workspace-grid">
+          <RequestForm onAddRequest={handleAddRequest} />
+          <section className="panel" aria-labelledby="request-list-title">
+            <div className="section-heading">
+              <h2 id="request-list-title">รายการคำร้อง</h2>
+              <FilterBar value={statusFilter}
+                onFilterChange={setStatusFilter} />
+            </div>
+            <RequestList
+              requests={filteredRequests}
+              onDeleteRequest={handleDeleteRequest}
+            />
+          </section>
+        </div>
       </main>
     </>
   );
 }
 
 export default App;
-
-
-
 
