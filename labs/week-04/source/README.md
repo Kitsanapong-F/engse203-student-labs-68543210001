@@ -88,33 +88,58 @@ npm run preview
 
 TODO: อธิบายว่าใคร owns requests/filter/form state, props ไหลลงตรงไหน และ callback ไหลกลับตรงไหน
 
-## Test Evidence
 
+การถือครองข้อมูล (State Ownership)
+
+ระดับแอปพลิเคชันหลัก (App Component): ทำหน้าที่เป็นศูนย์กลางในการเก็บ state ของรายการคำขอทั้งหมด (requests) และสถานะการกรองปัจจุบัน (statusFilter) เนื่องจากข้อมูลทั้งสองส่วนนี้จำเป็นต้องแชร์ให้ component อื่นๆ เช่น แผงสรุปผลและรายการแสดงผลใช้งานร่วมกันอย่างสอดคล้อง
+
+ระดับฟอร์มย่อย (RequestForm Component): แยก state เฉพาะตัวออกต่างหาก เช่น ข้อมูลที่กำลังพิมพ์ในฟอร์ม (formData), ข้อผิดพลาด (errors), และสถานะการแจ้งเตือน (feedback) เพื่อให้การพิมพ์หรือการตรวจสอบความถูกต้องภายในฟอร์มเป็นอิสระ ไม่รบกวนการทำงานส่วนอื่นจนกว่าจะกดส่งข้อมูลสำเร็จ
+
+การส่งผ่านข้อมูลลงล่าง (Props Down)
+
+ข้อมูลจะถูกถ่ายเทจาก component แม่ลงสู่ลูกตามความจำเป็นในการแสดงผล เช่น ส่งข้อมูลสรุปยอด (summary) ไปยังแผงแสดงสถิติ, ส่งค่าตัวกรอง (statusFilter) ไปยังแถบควบคุม, และส่งชุดข้อมูลที่ผ่านการคัดกรองแล้ว (filteredRequests) ไปให้ลิสต์รายการแปลงร่างเป็น Card แต่ละใบผ่านการวนลูป map()
+
+การส่งสัญญาณย้อนกลับ (Callbacks Up)
+
+Component ลูกจะไม่ทำการแก้ไขข้อมูลส่วนกลางด้วยตนเอง แต่จะอาศัยกลไกการส่งฟังก์ชัน callback กลับขึ้นไปหา component แม่ เช่น:
+
+เมื่อผู้ใช้กรอกฟอร์มผ่าน ระบบจะเรียกฟังก์ชันเพิ่มข้อมูลเพื่อสร้างไอดีใหม่และผนวกเข้ากับ state หลักแบบ immutable
+
+เมื่อคลิกเปลี่ยนปุ่มกรอง ค่าสถานะใหม่จะถูกส่งกลับไปอัปเดตที่ตัวแม่ทันที
+
+เมื่อกดลบรายการ ไอดีเป้าหมายจะถูกส่งสัญญาณขึ้นไป เพื่อให้ระบบคัดกรองรายการออกได้อย่างปลอดภัย
+
+## Test Evidence
 | Test ID | Actual Result | Pass/Fail | Evidence/Screenshot |
 |---|---|---|---|
-| TC-01 Initial | แสดงรายการเริ่มต้นและ summary ถูกต้องครบถ้วน, console ไม่มี error | Pass | <img src="image/week4/tc-01.png" |
-| TC-02 Controlled input | ทุก input/select field เปลี่ยนแปลงค่าตาม state ได้อย่างถูกต้องและลื่นไหล | Pass |<img src="image/week4/tc-02.png" |
-| TC-03 Invalid | ระบบบล็อกการส่งข้อมูลเมื่อฟิลด์ไม่ครบ/ไม่ถูกต้อง พร้อมแสดงข้อความแจ้งเตือนใกล้ช่องกรอกข้อมูล | Pass| <img src="image/week4/tc-03.png" |
-| TC-04 Valid add |เพิ่มรายการสถานะ pending สำเร็จ, summary อัปเดตตัวเลขทันที | Pass |<img src="image/week4/tc-04.png" |
-| TC-05 Filter | กรองแสดงเฉพาะรายการตามสถานะที่เลือก (เช่น pending, in-progress, completed) ได้อย่างถูกต้อง |Pass |<img src="image/week4/tc-05.png" |
-| TC-06 All | ปุ่มแสดงทั้งหมด (All) สามารถแสดงรายการทุกสถานะกลับมาครบถ้วน | Pass | <img src="image/week4/tc-06.png"|
-| TC-07 Empty | แสดงข้อความแจ้งเตือนเมื่อทำการกรองแล้วไม่พบข้อมูลหรือรายการว่างเปล่า | Pass| <img src="image/week4/tc-07.png" |
-| TC-08 Delete |ลบรายการตรงตาม ID ที่ระบุ, รายการใน list และตัวเลขใน summary อัปเดตถูกต้อง| Pass | <img src="image/week4/tc-08.png" |
-| TC-09 Mobile |แสดงผลหน้าจอขนาด 375px ได้สมบูรณ์ ไม่มีปัญหา Horizontal Scroll | Pass |<img src="image/week4/tc-09.png" |
-| TC-10 Keyboard | รองรับการนำทางด้วยปุ่ม Tab (Keyboard Navigation) มีการแสดง Focus-visible ชัดเจน และเชื่อมโยง label กับ input ถูกต้อง | Pass |<img src="image/week4/tc-10.png" |
-| TC-11 Build | รันคำสั่ง npm run build สำเร็จ ไม่มี Error และโฟลเดอร์ dist/ พร้อมใช้งาน | pass | <img src="<image/week4/tc-11.png" |
-| TC-12 Pages | TODO | TODO | TODO |
+| TC-01 Initial | แสดงรายการเริ่มต้นและ summary ถูกต้องครบถ้วน, console ไม่มี error | Pass | ![TC-01](../image/tc-01.png) |
+| TC-02 Controlled input | ทุก input/select field เปลี่ยนแปลงค่าตาม state ได้อย่างถูกต้องและลื่นไหล | Pass | ![TC-02](../image/tc-02.png) |
+| TC-03 Invalid | ระบบบล็อกการส่งข้อมูลเมื่อฟิลด์ไม่ครบ/ไม่ถูกต้อง พร้อมแสดงข้อความแจ้งเตือนใกล้ช่องกรอกข้อมูล | Pass | ![TC-03](../image/tc-03.png) |
+| TC-04 Valid add | เพิ่มรายการสถานะ pending สำเร็จ, summary อัปเดตตัวเลขทันที | Pass | ![TC-04](../image/tc-04.png) |
+| TC-05 Filter | กรองแสดงเฉพาะรายการตามสถานะที่เลือก (เช่น pending, in-progress, completed) ได้อย่างถูกต้อง | Pass | ![TC-05](week-04/image/tc-05.png) |
+| TC-06 All | ปุ่มแสดงทั้งหมด (All) สามารถแสดงรายการทุกสถานะกลับมาครบถ้วน | Pass | ![TC-06](../image/tc-06.png) |
+| TC-07 Empty | แสดงข้อความแจ้งเตือนเมื่อทำการกรองแล้วไม่พบข้อมูลหรือรายการว่างเปล่า | Pass | ![TC-07](../image/tc-07.png) |
+| TC-08 Delete | ลบรายการตรงตาม ID ที่ระบุ, รายการใน list และตัวเลขใน summary อัปเดตถูกต้อง | Pass | ![TC-08](../image/tc-08.png) |
+| TC-09 Mobile | แสดงผลหน้าจอขนาด 375px ได้สมบูรณ์ ไม่มีปัญหา Horizontal Scroll | Pass | ![TC-09](../image/tc-09.png) |
+| TC-10 Keyboard | รองรับการนำทางด้วยปุ่ม Tab (Keyboard Navigation) มีการแสดง Focus-visible ชัดเจน และเชื่อมโยง label กับ input ถูกต้อง | Pass | ![TC-10](../image/tc-10.png) |
+| TC-11 Build | รันคำสั่ง npm run build สำเร็จ ไม่มี Error และโฟลเดอร์ dist/ พร้อมใช้งาน | Pass | ![TC-11](../image/tc-11.png) |
+| TC-12 Pages | ทดสอบโหลดหน้าเว็บและ Assets สำเร็จครบถ้วน ไม่มีข้อผิดพลาด | Pass | ![TC-12](../image/tc-12.png) |
 
 ## Screenshots
 
+
+
 - Desktop: `evidence/desktop.png`
-     <img src="<image/week4/desktop.png"
+  ![Desktop](../image/desktop.png)
+
 - Mobile 375px: `evidence/mobile-375.png`
-    <img src="<image/week4/tc-09.png"
+  ![Mobile 375px](../image/tc-09.png)
+
 - Validation/empty state:
-    <img src="image/week4/tc-03.png"
-- empty state:
-    <img src="image/week4/tc-07.png"
+  ![Validation state](../image/tc-03.png)
+
+- Empty state:
+  ![Empty state](../image/tc-07.png)
 ## Week 03 → Week 04 Reflection
 
 TODO: เปรียบเทียบ DOM mutation กับ State-driven UI 3–5 ประโยค
