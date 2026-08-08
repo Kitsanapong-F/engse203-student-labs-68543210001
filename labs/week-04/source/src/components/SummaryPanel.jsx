@@ -1,7 +1,7 @@
 const items = [
   ['total', 'ทั้งหมด'],
   ['pending', 'รอดำเนินการ'],
-  ['inProgress', 'กำลังดำเนินการ'],
+  ['progress', 'กำลังดำเนินการ'],
   ['completed', 'เสร็จสิ้น'],
 ];
 

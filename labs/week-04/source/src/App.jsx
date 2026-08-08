@@ -15,19 +15,25 @@ function App() {
   const summary = {
     total: requests.length,
     pending: requests.filter((req) => req.status === 'pending').length,
-    inProgress: requests.filter((req) => req.status === 'inProgress').length,
+    progress: requests.filter((req) => req.status === 'progress').length,
     completed: requests.filter((req) => req.status === 'completed').length,
   };
 
   // TODO LAB4-R08: คำนวณ filteredRequests จาก requests + statusFilter
-  const filteredRequests = requests + statusFilter;
+  const filteredRequests = statusFilter === 'all' ? requests : requests.filter((req) => req.status === statusFilter);
 
   function handleAddRequest(requestData) {
-    console.log('TODO add request', requestData);
+    const nextId = String(requests.length + 1).padStart(3, '0');
+    const newRequest = {
+      id: `REQ-${nextId}`,
+      ...requestData,
+      status: 'pending'
+    };
+    setRequests((currentRequests) => [newRequest, ...currentRequests]);
   }
 
   function handleDeleteRequest(requestId) {
-    console.log('TODO delete request', requestId);
+   setRequests((currentRequests) => currentRequests.filter((Requests) => Requests.id !== requestId));
   }
 
   return (
