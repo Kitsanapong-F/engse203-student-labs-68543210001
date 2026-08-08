@@ -4,7 +4,7 @@ const initialRequests = {
   requestType: '',
   location: '',
   details: '',
-  priority: '',
+  priority: 'normal',
 }
 // TODO LAB4-R05–R07: validate controlled state แล้วเรียก onAddRequest
 function validateRequest(formData) {
@@ -93,9 +93,9 @@ function RequestForm({ onAddRequest }) {
 
         <div className="field">
           <label htmlFor="location">สถานที่</label>
-          <input id="location" name="location"  value={formData.location} onChange={handleChange}
+          <input id="location" name="location" value={formData.location} onChange={handleChange}
             aria-invalid={Boolean(errors.location)}
-            aria-describedby="location-error"/>
+            aria-describedby="location-error" />
           <small className="error" id="location-error">{errors.location}</small>
         </div>
 
@@ -109,10 +109,10 @@ function RequestForm({ onAddRequest }) {
 
         <fieldset className="field">
           <legend>ความเร่งด่วน</legend>
-          <label><input type="radio" name="priority" value="normal" defaultChecked onChange={handleChange}
+          <label><input type="radio" name="priority" value="normal" checked={formData.priority === 'normal'} onChange={handleChange}
             aria-invalid={Boolean(errors.priority)}
             aria-describedby="priority-error" /> ปกติ</label>
-          <label><input type="radio" name="priority" value="urgent" onChange={handleChange}
+          <label><input type="radio" name="priority" value="urgent" checked={formData.priority === 'normal'} onChange={handleChange}
             aria-invalid={Boolean(errors.priority)}
             aria-describedby="priority-error" /> เร่งด่วน</label>
           <small className="error" id="priority-error">{errors.priority}</small>
