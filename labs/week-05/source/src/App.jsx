@@ -15,7 +15,7 @@ function App() {
         <Route index element={<DashboardPage />} path="/" />
         <Route element={<NotFoundPage/>} path="*" />
         <Route element={<NewRequestPage/>} path="requests/new" />
-        
+        <Route element={<RequestDetailPage />} path="requests/:requestId" />
       </Route>
     </Routes>
 
