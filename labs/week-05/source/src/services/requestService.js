@@ -12,7 +12,8 @@
  */
 
 // TODO 5B-1: เปิดใช้บรรทัดล่างนี้เมื่อถึงคาบ 5B
-// import { clearStoredRequests, readStoredRequests, writeStoredRequests } from './requestStorage.js';
+
+import { clearStoredRequests, readStoredRequests, writeStoredRequests } from './requestStorage.js';
 
 const LAB_DELAY_MS = 420;
 
@@ -71,7 +72,8 @@ export async function getRequests(options = {}) {
     return [];
   }
 
-  return fetchSeedRequests();
+
+  return loadNormalRequests(options.onRecovery);
   // TODO 5B-3: เปลี่ยนบรรทัดข้างบนเป็น return loadNormalRequests(options.onRecovery);
 }
 
@@ -99,9 +101,12 @@ export async function getRequestById(requestId) {
  *   4. ถ้า status เป็น 'invalid' ให้เรียก onRecovery?.(ข้อความ) เพื่อให้หน้าจอแจ้งผู้ใช้
  *   5. คืนข้อมูล seed
  */
-// async function loadNormalRequests(onRecovery) {
-//   throw new Error('TODO 5B-2: loadNormalRequests');
-// }
+async function loadNormalRequests(onRecovery) {
+  const stored = await readStoredRequests();
+
+  return fetchSeedRequests()
+    //throw new Error('TODO 5B-2: loadNormalRequests');
+}
 
 /**
  * TODO 5B-4 · เพิ่มคำร้องใหม่
