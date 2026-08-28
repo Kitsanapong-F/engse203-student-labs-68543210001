@@ -14,11 +14,13 @@ function RequestDetailPage() {
   const [errorMessage, setErrorMessage] = useState('');
 
   useEffect(() => {
+    let ignore = false;
     setLoadState('loading');
     setErrorMessage('');
 
     getRequestById(requestId)
       .then((result) => {
+         if (ignore) return; 
         setRequest(result);
         setLoadState('success');
       })
@@ -27,6 +29,7 @@ function RequestDetailPage() {
         setLoadState('error');
       });
     // TODO 5B: เพิ่ม cleanup guard เพื่อกัน stale update
+     return () => { ignore = true; }; 
   }, [requestId, reloadKey]);
 
   return (

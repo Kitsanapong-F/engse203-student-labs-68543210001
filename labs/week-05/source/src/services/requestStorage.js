@@ -58,12 +58,24 @@ export function readStoredRequests() {
 
   try {
     const envelope = JSON.parse(rawValue);
-    // TODO 5B-A2: ตรวจ schemaVersion และ validateRequests ให้ครบใน CP04b
+    
+    // 1. ตรวจสอบเวอร์ชันของ Schema ว่าตรงกับที่โปรแกรมเรารู้จักหรือไม่
+    if (envelope.schemaVersion !== SCHEMA_VERSION) {
+      return { status: 'invalid', reason: 'เวอร์ชันของข้อมูลที่บันทึกไว้ไม่ตรงกัน' };
+    }
+
+    // 2. ตรวจสอบว่า requests ที่อยู่ในนั้นถูกต้องตามโครงสร้างหรือไม่
+    if (!validateRequests(envelope.requests)) {
+      return { status: 'invalid', reason: 'โครงสร้างข้อมูลคำร้องไม่ถูกต้องหรือเสียหาย' };
+    }
+
+    // ถ้าผ่านทั้งหมดก็คืนค่ากลับไปได้อย่างปลอดภัย
     return { status: 'valid', requests: structuredClone(envelope.requests) };
   } catch {
     return { status: 'invalid', reason: 'ข้อมูลที่บันทึกไว้ไม่ใช่ JSON ที่อ่านได้' };
   }
 }
+
 
 
 /**
@@ -84,8 +96,8 @@ export function writeStoredRequests(requests) {
     updatedAt: new Date().toISOString(),
     requests: structuredClone(requests),
   }));
-
 }
+
 
 
 /**

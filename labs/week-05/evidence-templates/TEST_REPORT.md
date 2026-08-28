@@ -5,13 +5,13 @@
 **Branch / Commit:** `lab/week-05` / TODO
 
 กรอก Actual result จากการรันจริง ใช้ `PASS`, `FAIL` หรือ `NOT RUN` และอ้างหลักฐานแบบ relative path
-
-| Test ID | Preconditions / procedure summary | Actual result | Status | Evidence / Notes |
-|---|---|---|---|---|
-| TC-L5-01 | เปิด `#/` | TODO | NOT RUN | |
-| TC-L5-02 | ใช้ navigation 3 รายการ | TODO | NOT RUN | |
-| TC-L5-03 | เปิด/refresh `#/requests/new` | TODO | NOT RUN | |
-| TC-L5-04 | เปิด `#/requests/REQ-001` | TODO | NOT RUN | `images/route-detail-found.png` |
+##  5A · CP02 — Routing
+| Test ID | Preconditions | procedure summary | Actual result | Status | Evidence / Notes |
+|---|---|---|---|---|---|
+| TC-L5-01 | เปิด `#/` | แสดงหน้า Route "/" ซึงเป็น Route  DashboardPage| แสดงหน้า DashboardPage พร้อมแสดงข้อมูลคำร้อง |  PASS |  |
+| TC-L5-02 | ใช้ navigation 3 รายการ |กดเปลี่ยนไปแต่ละ navigation |แสดงหน้าตามที่ navigation กำหนด Route ไว้| pass |  |
+| TC-L5-03 | เปิด/refresh `#/requests/new` | เป็นหน้า #/requests/new แล้วกด refresh | เมื่อกด refresh แล้วไม่แสดงหน้า NotFoundPage |  pass | |
+| TC-L5-04 | เปิด `#/requests/REQ-001` | เป็นไปยัง Route ของ คำร้องที่1 | แสดงหน้ารายละเอียดคำร้อง พร้อม ข้อมูล |pass |![route-not-found](images/route-not-found.png) |
 | TC-L5-05 | เปิด `#/requests/REQ-999` | TODO | NOT RUN | |
 | TC-L5-06 | เปิด `#/unknown` | TODO | NOT RUN | `images/route-not-found.png` |
 | TC-L5-07 | ลบ LAB05 key แล้วเปิด Dashboard | TODO | NOT RUN | |

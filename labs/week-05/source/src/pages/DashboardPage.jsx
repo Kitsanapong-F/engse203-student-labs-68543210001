@@ -6,7 +6,7 @@ import LoadingState from '../components/LoadingState.jsx';
 import RequestList from '../components/RequestList.jsx';
 import SummaryPanel from '../components/SummaryPanel.jsx';
 import useManualReload from '../hooks/useManualReload.js';
-import { getRequests } from '../services/requestService.js';
+import { getRequests, deleteRequest, resetRequests } from "../services/requestService.js";
 
 function DashboardPage() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -20,12 +20,14 @@ function DashboardPage() {
   const [notice, setNotice] = useState('');
 
   useEffect(() => {
+    let ignore = false;
     setLoadState('loading');
     setErrorMessage('');
     setNotice('');
 
     getRequests({ scenario })
       .then((data) => {
+         if (ignore) return; 
         setRequests(data);
         setLoadState('success');
       })
@@ -33,8 +35,9 @@ function DashboardPage() {
         setErrorMessage(error instanceof Error ? error.message : 'เกิดข้อผิดพลาดที่ไม่ทราบสาเหตุ');
         setLoadState('error');
       });
-      
+
     // TODO 5B: เพิ่ม cleanup guard เพื่อกัน stale update
+     return () => { ignore = true; };
   }, [scenario, reloadKey]);
 
   const summary = useMemo(() => ({
@@ -53,10 +56,21 @@ function DashboardPage() {
     else reload();
   }
 
-  function handleDelete(requestId) {
-    setRequests((current) => current.filter((request) => request.id !== requestId));
-    setNotice(`ลบคำร้อง ${requestId} ในหน่วยความจำแล้ว — refresh จะกลับมา`);
+  async function handleDelete(requestId) {
+    const next = await deleteRequest(requestId);
+    setRequests(next);
+    setNotice(`ลบคำร้อง ${requestId} แล้ว`);
   }
+
+  async function handleReset() {
+    if (!window.confirm('คืนค่าข้อมูลตัวอย่างเริ่มต้น และลบคำร้องที่เพิ่มไว้ทั้งหมด?')) return;
+    const seedRequests = await resetRequests();
+    setRequests(seedRequests);
+    setStatusFilter('all');
+    setNotice('คืนค่าข้อมูลตัวอย่างเรียบร้อยแล้ว');
+  }
+
+
 
   return (
     <section data-testid="page-dashboard">
@@ -66,6 +80,9 @@ function DashboardPage() {
           <h1>Dashboard</h1>
           <p>ติดตามคำร้องจาก URL และ Service Layer</p>
         </div>
+        <button className="button ghost" data-testid="reset-button" type="button" onClick={handleReset}>
+          Reset Demo Data
+        </button>
       </div>
 
       {scenario && <p className="lab-scenario" role="status">LAB test scenario: {scenario}</p>}
