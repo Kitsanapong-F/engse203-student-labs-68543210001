@@ -19,15 +19,23 @@ function DashboardPage() {
   const [errorMessage, setErrorMessage] = useState('');
   const [notice, setNotice] = useState('');
 
-  useEffect(() => {
+ useEffect(() => {
     let ignore = false;
     setLoadState('loading');
     setErrorMessage('');
     setNotice('');
 
-    getRequests({ scenario })
+
+    getRequests({
+      scenario,
+      onRecovery: (reason) => {
+        if (!ignore) {
+          setNotice(`ระบบกู้คืนข้อมูลอัตโนมัติ: ${reason}`);
+        }
+      }
+    })
       .then((data) => {
-         if (ignore) return; 
+        if (ignore) return;
         setRequests(data);
         setLoadState('success');
       })
@@ -35,9 +43,8 @@ function DashboardPage() {
         setErrorMessage(error instanceof Error ? error.message : 'เกิดข้อผิดพลาดที่ไม่ทราบสาเหตุ');
         setLoadState('error');
       });
-
-    // TODO 5B: เพิ่ม cleanup guard เพื่อกัน stale update
-     return () => { ignore = true; };
+       // TODO 5B: เพิ่ม cleanup guard เพื่อกัน stale update
+    return () => { ignore = true; };
   }, [scenario, reloadKey]);
 
   const summary = useMemo(() => ({
