@@ -101,6 +101,8 @@ function DashboardPage() {
           <section className="panel" aria-labelledby="request-list-title">
             <div className="section-heading"><h2 id="request-list-title">รายการคำร้อง</h2><FilterBar value={statusFilter} onFilterChange={setStatusFilter} /></div>
             {/* TODO B2: วางช่อง <input> ค้นหา ตรงนี้ (เหนือรายการ) แล้วกรองร่วมกับตัวกรองสถานะ */}
+            <p></p>
+            <input type="text" name="" id=""  placeholder="ค้นหาจากผู้แจ้งหรือรายละเอียด" />
             {/* TODO B3: เพิ่ม onMarkDone={handleMarkDone} และเขียน handleMarkDone ให้เรียก updateRequestStatus แล้ว setRequests เพื่อให้ summary อัปเดต + รอด refresh */}
             <RequestList requests={filteredRequests} onDeleteRequest={handleDelete} />
           </section>
