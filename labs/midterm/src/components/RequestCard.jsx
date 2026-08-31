@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import PriorityBadge from './PriorityBadge.jsx'; 
 
 function RequestCard({ request, onDeleteRequest, onMarkDone }) {
   return (
@@ -8,11 +9,14 @@ function RequestCard({ request, onDeleteRequest, onMarkDone }) {
         <h3><Link to={`/requests/${request.id}`}>{request.requestType}</Link></h3>
         <p>{request.location}</p>
         <p>{request.details}</p>
-        {/* TODO B4: แทน {request.priority} ด้านล่างด้วย <PriorityBadge priority={request.priority} /> ที่คุณสร้าง */}
+        
+        {/* CP-B4.2: วางบรรทัดนี้เพื่อทดสอบชั่วคราวตามโจทย์ */}
+        <PriorityBadge priority="high" /> 
+        
         <p><span className={`badge ${request.status}`}>{request.status}</span> · {request.priority}</p>
       </div>
+      
       <div className="card-actions">
-        {/* .CP-B3.1: แสดงปุ่มทำเสร็จเฉพาะรายการที่ยังไม่ completed */}
         {request.status !== 'completed' && (
           <button 
             className="button secondary" 

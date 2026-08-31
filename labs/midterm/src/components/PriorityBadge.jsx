@@ -7,7 +7,8 @@ function PriorityBadge({ priority }) {
     return <span className="priority-normal">ปกติ</span>;
   }
 
-  return null;
+  // CP-B4.2
+  return <span className="priority-unknown">ไม่ระบุ</span>;
 }
 
 export default PriorityBadge;
