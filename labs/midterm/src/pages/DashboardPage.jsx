@@ -107,6 +107,7 @@ function DashboardPage() {
           <SummaryPanel summary={summary} />
           <section className="panel" aria-labelledby="request-list-title">
             <div className="section-heading"><h2 id="request-list-title">รายการคำร้อง</h2><FilterBar value={statusFilter} onFilterChange={setStatusFilter} /></div>
+            <p></p>
             <input
               type="text"
               placeholder="ค้นหาจากผู้แจ้งหรือรายละเอียด"
