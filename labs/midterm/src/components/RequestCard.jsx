@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import PriorityBadge from './PriorityBadge.jsx'; 
+import PriorityBadge from './PriorityBadge.jsx';
 
 function RequestCard({ request, onDeleteRequest, onMarkDone }) {
   return (
@@ -10,10 +10,10 @@ function RequestCard({ request, onDeleteRequest, onMarkDone }) {
         <p>{request.location}</p>
         <p>{request.details}</p>
         
-        {/* CP-B4.2: วางบรรทัดนี้เพื่อทดสอบชั่วคราวตามโจทย์ */}
-        <PriorityBadge priority="high" /> 
-        
-        <p><span className={`badge ${request.status}`}>{request.status}</span> · {request.priority}</p>
+      {/* CP-B4.3 */}
+        <p>
+          <span className={`badge ${request.status}`}>{request.status}</span> · <PriorityBadge priority={request.priority} />
+        </p>
       </div>
       
       <div className="card-actions">
