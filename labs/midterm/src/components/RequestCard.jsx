@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 
-function RequestCard({ request, onDeleteRequest }) {
+function RequestCard({ request, onDeleteRequest, onMarkDone }) {
   return (
     <article className="request-card">
       <div>
