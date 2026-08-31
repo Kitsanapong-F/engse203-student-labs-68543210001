@@ -15,7 +15,6 @@ function DashboardPage() {
   const [loadState, setLoadState] = useState('idle');
   const [requests, setRequests] = useState([]);
   const [statusFilter, setStatusFilter] = useState('all');
-  // TODO B2: เพิ่ม state สำหรับข้อความค้นหา ที่นี่
   const [search, setSearch] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const [notice, setNotice] = useState('');
@@ -55,10 +54,12 @@ function DashboardPage() {
     const matchStatus = statusFilter === 'all' || request.status === statusFilter;
     const matchSearch =
       request.requesterName.toLowerCase().includes(searchLower) ||
-      request.details.toLowerCase().includes(searchLower) || request.status.toLowerCase().includes(searchLower);
+      request.details.toLowerCase().includes(searchLower) ||
+      request.status.toLowerCase().includes(searchLower); // เติม () หลัง toLowerCase
 
     return matchStatus && matchSearch;
   });
+
   function handleRetry() {
     if (scenario) setSearchParams({});
     else reload();
@@ -86,7 +87,6 @@ function DashboardPage() {
     }
   }
 
-
   return (
     <section data-testid="page-dashboard">
       <div className="page-heading">
@@ -107,16 +107,21 @@ function DashboardPage() {
           <SummaryPanel summary={summary} />
           <section className="panel" aria-labelledby="request-list-title">
             <div className="section-heading"><h2 id="request-list-title">รายการคำร้อง</h2><FilterBar value={statusFilter} onFilterChange={setStatusFilter} /></div>
-            {/* TODO B2: วางช่อง <input> ค้นหา ตรงนี้ (เหนือรายการ) แล้วกรองร่วมกับตัวกรองสถานะ */}
-            <p></p>
             <input
               type="text"
               placeholder="ค้นหาจากผู้แจ้งหรือรายละเอียด"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
             />
-            {/* TODO B3: เพิ่ม onMarkDone={handleMarkDone} และเขียน handleMarkDone ให้เรียก updateRequestStatus แล้ว setRequests เพื่อให้ summary อัปเดต + รอด refresh */}
-            <RequestList requests={filteredRequests} onDeleteRequest={handleDelete} />
+            
+            {filteredRequests.length === 0 ? (
+              <p className="subtle-empty" style={{ textAlign: 'center', padding: '2rem' }}>
+                ไม่พบคำร้องที่ตรงกับการค้นหา
+              </p>
+            ) : (
+              <RequestList requests={filteredRequests} onDeleteRequest={handleDelete} />
+              /* TODO B3: เพิ่ม onMarkDone={handleMarkDone} และเขียน handleMarkDone ให้เรียก updateRequestStatus แล้ว setRequests เพื่อให้ summary อัปเดต + รอด refresh */
+            )}
           </section>
         </>
       )}
