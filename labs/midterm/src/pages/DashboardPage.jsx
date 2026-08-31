@@ -53,10 +53,9 @@ function DashboardPage() {
 
   const filteredRequests = requests.filter((request) => {
     const matchStatus = statusFilter === 'all' || request.status === statusFilter;
-
     const matchSearch =
       request.requesterName.toLowerCase().includes(searchLower) ||
-      request.details.toLowerCase().includes(searchLower);
+      request.details.toLowerCase().includes(searchLower) || request.status.toLowerCase().includes(searchLower);
 
     return matchStatus && matchSearch;
   });
