@@ -12,7 +12,7 @@ function RequestCard({ request, onDeleteRequest, onMarkDone }) {
         <p><span className={`badge ${request.status}`}>{request.status}</span> · {request.priority}</p>
       </div>
       <div className="card-actions">
-        {/* CP-B3.1: แสดงปุ่มทำเสร็จเฉพาะรายการที่ยังไม่ completed */}
+        {/* .CP-B3.1: แสดงปุ่มทำเสร็จเฉพาะรายการที่ยังไม่ completed */}
         {request.status !== 'completed' && (
           <button 
             className="button secondary" 
