@@ -20,18 +20,19 @@ _
 
 | # | Method | Path | status ที่ควรได้ | ที่ได้จริง | ผ่าน |
 |---|---|---|---|---|---|
-| 10 | GET | `/api/requests?status=pending` | 200 (กรองแล้ว) | | ☐ |
-| 11 | PUT | `/api/requests/REQ-001` + `{"status":"in-progress"}` | 200 | | ☐ |
-| 12 | PUT | `/api/requests/REQ-001` + `{"status":"มั่ว"}` | 400 | | ☐ |
+| 10 | GET | `/api/requests?status=pending` | 200 (กรองแล้ว) | ![get-status-filter-pending](images/get-status-filter-pending.png) | ✓ |
+| 11 | PUT | `/api/requests/REQ-001` + `{"status":"in-progress"}` | 200 | ![get-status-pending](images/get-status-pending.png) | ✓ |
+| 12 | PUT | `/api/requests/REQ-001` + `{"status":"มั่ว"}` | 400 | ![get-status-mixed](images/get-status-mixed.png) | ✓ |
+
 
 ## ทดสอบว่าข้อมูลอยู่ถาวร (CP08)
 
 | ขั้น | ทำอะไร | ผลที่เห็น |
-|---|---|---|
-| 1 | POST เพิ่มคำร้องใหม่ | |
-| 2 | GET ดูรายการ — เห็นคำร้องใหม่ไหม | |
-| 3 | Ctrl+C ปิดเซิร์ฟเวอร์ แล้วเปิดใหม่ | |
-| 4 | GET ดูรายการอีกครั้ง — คำร้องยังอยู่ไหม | |
+|:---:|---|---|
+| 1 | POST เพิ่มคำร้องใหม่ | ![POST](images/POST.png) |
+| 2 | GET ดูรายการ — เห็นคำร้องใหม่ไหม | ![GET](images/GET.png) |
+| 3 | Ctrl+C ปิดเซิร์ฟเวอร์ แล้วเปิดใหม่ | ![Close](images/close.png) |
+| 4 | GET ดูรายการอีกครั้ง — คำร้องยังอยู่ไหม | ![GET2](images/GET2.png) |
 
 ## สรุปผล
 
