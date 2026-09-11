@@ -24,19 +24,60 @@ function readText(value) {
  */
 export function validateRequest(req, res, next) {
   const input = req.body;
-  const errors = [];
 
-  if (!input || typeof input !== 'object') {
-    return res.status(400).json({ error: 'ต้องส่งข้อมูลคำร้องมาด้วย' });
+  const typeofError = setTypeof(input);
+  if (typeofError) {
+    return res.status(400).json({ error: 'ข้อมูลคำร้องไม่ถูกต้อง', details: [typeofError] });
   }
-  if (readText(input.requesterName).length < 2) errors.push('ชื่อผู้แจ้งต้องมีอย่างน้อย 2 ตัวอักษร');
-  if (!REQUEST_TYPES.includes(input.requestType)) errors.push('ประเภทคำร้องไม่ถูกต้อง');
-  if (!readText(input.location)) errors.push('กรุณาระบุสถานที่');
-  if (readText(input.details).length < 10) errors.push('รายละเอียดต้องมีอย่างน้อย 10 ตัวอักษร');
-  if (!PRIORITIES.includes(input.priority)) errors.push('ความเร่งด่วนต้องเป็น normal หรือ urgent');
+
+
+  const errors = [
+    setName(input),
+    setType(input),
+    setDetails(input),
+    setLocation(input),
+    setPriority(input),
+  ].filter(Boolean);
 
   if (errors.length > 0) {
     return res.status(400).json({ error: 'ข้อมูลคำร้องไม่ถูกต้อง', details: errors });
   }
   next();
 }
+
+export function setTypeof(input) {
+  if (!input || typeof input !== 'object') {
+    return 'ต้องส่งข้อมูลคำร้องมาด้วย';
+  }
+}
+
+export function setName(input) {
+  if (readText(input.requesterName).length < 2) {
+    return 'ชื่อผู้แจ้งต้องมีอย่างน้อย 2 ตัวอักษร';
+  }
+}
+
+export function setType(input) {
+  if (!REQUEST_TYPES.includes(input.requestType)) {
+    return 'ประเภทคำร้องไม่ถูกต้อง';
+  }
+}
+
+export function setDetails(input) {
+  if (readText(input.details).length < 10) {
+    return 'รายละเอียดต้องมีอย่างน้อย 10 ตัวอักษร';
+  }
+}
+
+export function setLocation(input) {
+  if (!readText(input.location)) {
+    return 'กรุณาระบุสถานที่';
+  }
+}
+
+export function setPriority(input) {
+  if (!PRIORITIES.includes(input.priority)) {
+    return 'ความเร่งด่วนต้องเป็น normal หรือ urgent';
+  }
+}
+

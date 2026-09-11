@@ -33,7 +33,7 @@ export function findAll({ status } = {}) {
  * TODO W06-S2 (CP02) · คืนคำร้องใบเดียวตามรหัส
  * - ถ้าไม่พบให้คืน null (ห้าม throw — controller จะเป็นคนตัดสินว่าตอบ 404)
  */
-export function findById(id) {
+export async function findById(id) {
   const found = requests.find((r) => r.id === id);
   return found ? structuredClone(found) : null;
 }

@@ -20,8 +20,9 @@ export function listRequests(req, res) {
  * - อ่านรหัสจาก req.params.id
  * - ไม่พบ → 404 พร้อมข้อความ · พบ → 200 พร้อมข้อมูล
  */
-export function getRequest(req, res) {
-  const found = service.findById(req.params.id);
+
+export async function getRequest(req, res) {
+  const found = await service.findById(req.params.id);
   if (!found) {
     return res.status(404).json({ error: `ไม่พบคำร้องรหัส ${req.params.id}` });
   }
@@ -34,8 +35,8 @@ export function getRequest(req, res) {
  * - เรียก service.create() แล้วตอบ 201 พร้อมคำร้องที่สร้าง
  * ⚠ POST สำเร็จตอบ 201 ไม่ใช่ 200
  */
-export function createRequest(req, res) {
-  const created = service.create(req.body);
+export async function createRequest(req, res) {
+  const created = await service.create(req.body);
   res.status(201).json(created);
 }
 
@@ -62,8 +63,8 @@ export async function updateRequestStatus(req, res) {
  * TODO W06-C5 (CP05) · DELETE /api/requests/:id
  * - ไม่พบ → 404 · ลบสำเร็จ → 204 (ไม่มีข้อมูลส่งกลับ ใช้ res.status(204).end())
  */
-export function deleteRequest(req, res) {
-  const removed = service.remove(req.params.id);
+export async function deleteRequest(req, res) {
+  const removed = await service.remove(req.params.id);
   if (!removed) {
     return res.status(404).json({ error: `ไม่พบคำร้องรหัส ${req.params.id}` });
   }
