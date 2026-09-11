@@ -11,7 +11,7 @@ export function createApp() {
    * TODO W06-A1 (CP03) · ติดตั้ง middleware — ต้องมาก่อน route เสมอ
    *   app.use(logger)            ← บันทึกทุกคำขอ
    *   app.use(express.json())    ← ทำให้ req.body อ่านได้
-   *  
+   *
    * ⚠ ถ้าลืม express.json() แล้ว req.body จะเป็น undefined ตลอด
    *   POST จะพังโดยไม่มี error บอกสาเหตุ — กับดักอันดับ 1 ของมือใหม่
    */
@@ -37,6 +37,7 @@ export function createApp() {
    * TODO W06-A4 (🏠 CP07) · ปิดท้ายด้วย notFound แล้วตามด้วย errorHandler
    * ⚠ สองตัวนี้ต้องอยู่ท้ายสุด หลัง route ทั้งหมด
    */
-
+  app.use(notFound);       
+  app.use(errorHandler)
   return app;
 }
