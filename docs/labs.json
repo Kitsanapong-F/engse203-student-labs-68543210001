@@ -64,14 +64,29 @@
     "title": "React Campus Service Request",
     "status": "submitted",
     "originalRepoUrl": "https://github.com/Kitsanapong-F/engse203-student-labs-68543210001/tree/lab/week-05",
-    "originalCommit": "3e2867b",
-    "pullRequestUrl": "https://github.com/Kitsanapong-F/engse203-student-labs-68543210001/pull/8",
+    "originalCommit": "38247ed",
+    "pullRequestUrl": "https://github.com/Kitsanapong-F/engse203-student-labs-68543210001/pull/9",
     "submissionTag": "lab-05-submission-v1",
     "testStatus": "pass",
     "notes": "ทำโจทย์ 5A และ 5B ครบถ้วน และ ",
     "pageUrl": "https://Kitsanapong-F.github.io/engse203-student-labs-68543210001/labs/week-05/",
     "sourceUrl": "https://github.com/Kitsanapong-F/engse203-student-labs-68543210001/tree/lab/week-05/labs/week-05/source",
     "hasPublish": true,
-    "sourceEntries": 12
+    "sourceEntries": 11
+  },
+  {
+    "week": "week-06",
+    "title": "Node.js / Express API Foundation",
+    "status": "ready",
+    "originalRepoUrl": "https://github.com/Kitsanapong-F/engse203-student-labs-68543210001/tree/lab/week-06",
+    "originalCommit": "8499ea0",
+    "pullRequestUrl": "",
+    "submissionTag": "lab-01-submission-v1",
+    "testStatus": "pass",
+    "notes": "RESTful API ด้วย Express และ Challenge ครบถ้วน (28/28 รายการ)",
+    "pageUrl": "https://Kitsanapong-F.github.io/engse203-student-labs-68543210001/labs/week-06/",
+    "sourceUrl": "https://github.com/Kitsanapong-F/engse203-student-labs-68543210001/tree/lab/week-06/labs/week-06/source",
+    "hasPublish": false,
+    "sourceEntries": 0
   }
 ]
