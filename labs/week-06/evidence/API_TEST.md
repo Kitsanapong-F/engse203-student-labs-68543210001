@@ -21,8 +21,8 @@ _
 | # | Method | Path | status ที่ควรได้ | ที่ได้จริง | ผ่าน |
 |---|---|---|---|---|---|
 | 10 | GET | `/api/requests?status=pending` | 200 (กรองแล้ว) | ![get-status-filter-pending](images/get-status-filter-pending.png) | ✓ |
-| 11 | PUT | `/api/requests/REQ-001` + `{"status":"in-progress"}` | 200 | ![get-status-pending](images/get-status-pending.png) | ✓ |
-| 12 | PUT | `/api/requests/REQ-001` + `{"status":"มั่ว"}` | 400 | ![get-status-mixed](images/get-status-mixed.png) | ✓ |
+| 11 | PUT | `/api/requests/REQ-001` + `{"status":"in-progress"}` | 200 | ![get-status-pending](images/put-status-pending.png) | ✓ |
+| 12 | PUT | `/api/requests/REQ-001` + `{"status":"มั่ว"}` | 400 | ![get-status-mixed](images/put-status-mixed.png) | ✓ |
 
 
 ## ทดสอบว่าข้อมูลอยู่ถาวร (CP08)
