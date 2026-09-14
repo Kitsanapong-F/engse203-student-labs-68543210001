@@ -1,8 +1,9 @@
+import cors from 'cors';
 import express from 'express';
 import { config } from './config.js';
 import requestRoutes from './routes/requestRoutes.js';
 import { errorHandler, notFound } from './middleware/errorHandler.js';
-import cors from 'cors';
+
 
 export function createApp() {
   const app = express();
