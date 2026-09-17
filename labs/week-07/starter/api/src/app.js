@@ -3,7 +3,7 @@ import express from 'express';
 import { config } from './config.js';
 import requestRoutes from './routes/requestRoutes.js';
 import { errorHandler, notFound } from './middleware/errorHandler.js';
-
+import morgan from 'morgan';
 
 export function createApp() {
   const app = express();
@@ -18,7 +18,7 @@ export function createApp() {
    */
     // ต้องอยู่บนสุด ก่อน middleware และ route ทั้งหมด
   app.use(cors({ origin: config.corsOrigin }));
-  
+
 
   /**
    * TODO W07-A2 (🏠 CP14) · เปลี่ยน logger เองเป็น morgan
@@ -26,6 +26,7 @@ export function createApp() {
    *   prod → morgan('combined')  ละเอียด เหมาะเก็บ log
    * ใช้ config.isProduction ตัดสิน
    */
+  app.use(morgan(config.isProduction ? 'combined' : 'dev'));
 
   app.use(express.json());
 

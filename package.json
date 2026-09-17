@@ -16,6 +16,7 @@
     "verify:lab": "node scripts/verify-repository.mjs --week"
   },
   "dependencies": {
+    "cors": "^2.8.6",
     "supertest": "^7.2.2"
   }
 }

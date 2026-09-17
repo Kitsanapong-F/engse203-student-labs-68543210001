@@ -34,6 +34,9 @@ input[aria-invalid="true"],select[aria-invalid="true"],textarea[aria-invalid="tr
 .button.primary,.filter-active { color:white; background:var(--blue); }
 .button.secondary { color:var(--navy); border-color:var(--border); background:#eef4fb; }
 .button.danger { align-self:start; color:var(--danger); background:#feeceb; }
+.button.pending { color:#7a4700; background:#fff0cc; }
+.button.in-progress { color:#075e68; background:#dff6f5; }
+.button.completed { color:#176b45; background:#dff4e8; }
 .button.inline { display:inline-block; text-decoration:none; }
 .filter-bar { display:flex; flex-wrap:wrap; gap:.4rem; }
 .filter-button { border:1px solid var(--border); border-radius:.6rem; padding:.55rem .7rem; color:var(--navy); background:#eef4fb; }
