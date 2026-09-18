@@ -88,5 +88,20 @@
     "sourceUrl": "https://github.com/Kitsanapong-F/engse203-student-labs-68543210001/tree/lab/week-06/labs/week-06/source",
     "hasPublish": false,
     "sourceEntries": 6
+  },
+  {
+    "week": "week-07",
+    "title": "RESTful API, Validation & Error Handling",
+    "status": "submitted",
+    "originalRepoUrl": "https://github.com/Kitsanapong-F/engse203-student-labs-68543210001/tree/lab/week-07",
+    "originalCommit": "0d5fa21",
+    "pullRequestUrl": "https://github.com/Kitsanapong-F/engse203-student-labs-68543210001/pull/12",
+    "submissionTag": "lab-07-submission-v1",
+    "testStatus": "pass",
+    "notes": "RESTful API, Validation & Error Handling ครบถ้วน (36/36 รายการ)",
+    "pageUrl": "https://Kitsanapong-F.github.io/engse203-student-labs-68543210001/labs/week-07/",
+    "sourceUrl": "https://github.com/Kitsanapong-F/engse203-student-labs-68543210001/tree/lab/week-07/labs/week-07/source",
+    "hasPublish": true,
+    "sourceEntries": 6
   }
 ]
