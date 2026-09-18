@@ -30,6 +30,9 @@ async function parseError(response) {
   }
 }
 
+// ฟังก์ชันช่วยสำหรับการหน่วงเวลา (Delay)
+const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
 /**
  * TODO W07-F2 (CP11) · เรียก API แล้วคืนข้อมูลที่ parse แล้ว
  *
@@ -42,7 +45,7 @@ async function parseError(response) {
  *
  * อย่าลืมส่ง header 'Content-Type': 'application/json'
  */
-export async function apiFetch(path, options = {}) {
+export async function apiFetch(path, options = {}, retries = 3, backoff = 500) {
   let response;
   try {
     response = await fetch(`${BASE_URL}${path}`, {
@@ -50,12 +53,21 @@ export async function apiFetch(path, options = {}) {
       ...options,
     });
   } catch {
-    // ① ต่อเซิร์ฟเวอร์ไม่ได้เลย — fetch โยน error
+    // ① ต่อเซิร์ฟเวอร์ไม่ได้เลย — fetch โยน error (Retry หากยังเหลือจำนวนครั้ง)
+    if (retries > 0) {
+      await sleep(backoff);
+      return apiFetch(path, options, retries - 1, backoff * 2);
+    }
     throw new ApiError('ติดต่อเซิร์ฟเวอร์ไม่ได้ — ตรวจว่าเปิด API ที่พอร์ต 3001 แล้วหรือยัง', 0);
   }
 
   if (!response.ok) {
     // ② เซิร์ฟเวอร์ตอบ แต่เป็น 4xx/5xx
+    // Retry เฉพาะ 5xx (Server Error) แต่ไม่ Retry เมื่อเจอ 4xx (Client Error)
+    if (response.status >= 500 && retries > 0) {
+      await sleep(backoff);
+      return apiFetch(path, options, retries - 1, backoff * 2);
+    }
     throw new ApiError(await parseError(response), response.status);
   }
 

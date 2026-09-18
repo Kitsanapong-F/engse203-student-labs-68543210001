@@ -7,7 +7,7 @@ export function listRequests(req, res) {
   res.status(200).json(service.findAll({ status }));
 }
 
-export function getRequest(req, res) {
+export function getRequestById(req, res) {
   const found = service.findById(req.params.id);
   if (!found) {
     return res.status(404).json({ error: `ไม่พบคำร้องรหัส ${req.params.id}` });
@@ -40,3 +40,5 @@ export function deleteRequest(req, res) {
   }
   res.status(204).end();
 }
+
+
