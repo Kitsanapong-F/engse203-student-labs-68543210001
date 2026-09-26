@@ -5,6 +5,8 @@ import 'dotenv/config';
  * ทำให้รู้ได้ทันทีว่าแอปนี้ต้องการค่าอะไรบ้าง
  */
 export const config = {
+  dbFile: process.env.DB_FILE ?? './data/campus.db',
+  schemaFile: process.env.SCHEMA_FILE ?? './data/schema.sql',
   port: Number(process.env.PORT ?? 3001),
   corsOrigin: process.env.CORS_ORIGIN ?? 'http://localhost:5173',
   nodeEnv: process.env.NODE_ENV ?? 'development',

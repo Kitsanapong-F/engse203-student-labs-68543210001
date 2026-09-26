@@ -2,6 +2,16 @@ import { readFile } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
+import { config } from '../config.js';
+import { DatabaseSync } from 'node:sqlite'
+
+const HERE = path.dirname(fileURLToPath(import.meta.url));
+const API_ROOT = path.resolve(HERE, '../..');
+
+
+const db = new DatabaseSync(config.dbFile);
+db.exec('PRAGMA foreign_keys = ON');
+//config.dbFile;
 /**
  * Week 10 — เปลี่ยน service จากอ่านไฟล์ JSON เป็นฐานข้อมูล SQLite
  *
@@ -13,8 +23,8 @@ import { fileURLToPath } from 'node:url';
  */
 
 // ── ของเดิม Week 07 (อ่านไฟล์ JSON) — จะถูกแทนที่ ──
-const HERE = path.dirname(fileURLToPath(import.meta.url));
-const DATA = path.resolve(HERE, '../..', 'data', 'requests.json');
+//const HERE = path.dirname(fileURLToPath(import.meta.url));
+//const DATA = path.resolve(HERE, '../..', 'data', 'requests.json');
 let requests = [];
 
 export async function loadSeed() {
@@ -28,11 +38,15 @@ export async function loadSeed() {
    * TODO W10-2 (CP27) · ⚠ path ต้องอ้างจากตำแหน่งไฟล์นี้ ไม่ใช่จากที่รันคำสั่ง
    *   ใช้ fileURLToPath(import.meta.url) — ไม่งั้น dev กับ checker หาไฟล์คนละที่
    */
-  try {
+  const ready = db.prepare(
+    "SELECT COUNT(*) c FROM sqlite_master WHERE type='table' AND name='requests'"
+  ).get().c;
+  if (!ready) db.exec(readFileSync(SCHEMA_FILE, 'utf8'));
+  /*try {
     requests = JSON.parse(await readFile(DATA, 'utf8'));
   } catch {
     requests = [];
-  }
+  }*/
 }
 
 export function findAll({ status } = {}) {
@@ -43,12 +57,12 @@ export function findAll({ status } = {}) {
    *   - ถ้ามี status ให้เติม WHERE r.status = ?
    *   คำใบ้: คัดลอก query จาก queries.sql ที่ทำสัปดาห์ที่แล้วมาปรับ
    */
-  return status ? requests.filter((r) => r.status === status) : requests;
+  return db.prepare('SELECT * FROM requests').all();
 }
 
 export function findById(id) {
   /** TODO W10-4 (CP28) · SELECT ... WHERE r.id = ?  · ไม่พบให้คืน null */
-  return requests.find((r) => r.id === id) ?? null;
+  return db.prepare('SELECT * FROM requests WHERE id = ?').get(id);
 }
 
 export function create(input) {
