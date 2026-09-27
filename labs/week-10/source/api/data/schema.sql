@@ -71,4 +71,5 @@ INSERT INTO requests (id, requester_id, request_type, location, details, priorit
   ('REQ-007', 3, 'แจ้งซ่อม',             'ห้องสมุด ชั้น 2',     'คอมพิวเตอร์เครื่องที่ 15 เปิดไม่ติด', 'normal', 'pending'),
   ('REQ-008', 1, 'ขอใช้อุปกรณ์',             'ห้องสมุด ชั้น 2',     'ขอยืมจอคอม', 'normal', 'pending');
 
-
+CREATE INDEX IF NOT EXISTS idx_requests_status ON requests(status);
+CREATE INDEX IF NOT EXISTS idx_requests_requester ON requests(requester_id);

@@ -53,7 +53,7 @@ export async function loadSeed() {
   const ready = db.prepare(
     "SELECT COUNT(*) c FROM sqlite_master WHERE type='table' AND name='requests'"
   ).get().c;
- if (!ready) {
+  if (!ready) {
     const sql = readFileSync(SCHEMA_FILE, 'utf8');
     db.exec(sql);
   }
@@ -91,26 +91,38 @@ export function create(input) {
    */
   const id = nextId();
   const requesterName = (input.requesterName || '').trim();
-  const requesterId = resolveUserId(requesterName);
 
-  db.prepare(
-    `INSERT INTO requests (id, requester_id, request_type, location, details, priority)
-     VALUES (?, ?, ?, ?, ?, ?)`
-  ).run(
-    id,
-    requesterId,
-    input.requestType,
-    (input.location || '').trim(),
-    (input.details || '').trim(),
-    input.priority ?? 'normal'
-  );
+  // เริ่มต้น Transaction
+  db.exec('BEGIN');
+  try {
+    const requesterId = resolveUserId(requesterName);
+
+    db.prepare(
+      `INSERT INTO requests (id, requester_id, request_type, location, details, priority)
+       VALUES (?, ?, ?, ?, ?, ?)`
+    ).run(
+      id,
+      requesterId,
+      input.requestType,
+      (input.location || '').trim(),
+      (input.details || '').trim(),
+      input.priority ?? 'normal'
+    );
+
+    // ยืนยันการบันทึกเมื่อสำเร็จทั้งหมด
+    db.exec('COMMIT');
+  } catch (err) {
+    // ยกเลิกการเปลี่ยนแปลงทั้งหมดหากเกิด error (เช่น ไม่สร้าง user ค้างไว้)
+    db.exec('ROLLBACK');
+    throw err;
+  }
 
   return findById(id);
 }
 
 export function updateStatus(id, status) {
   /** TODO W10-6 (CP30) · UPDATE requests SET status = ? WHERE id = ? · ไม่พบคืน null */
- const result = db.prepare('UPDATE requests SET status = ? WHERE id = ?')
+  const result = db.prepare('UPDATE requests SET status = ? WHERE id = ?')
     .run(status, id);
   return result.changes ? findById(id) : null;
 }

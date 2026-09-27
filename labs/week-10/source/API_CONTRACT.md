@@ -247,4 +247,23 @@ cd frontend && npm run dev     # http://localhost:5173
 
 > **contract มีไว้บอกสิ่งที่เดาไม่ได้** ไม่ใช่แค่ลอกรายการ endpoint
 
+## การเพิ่มประสิทธิภาพด้วย INDEX
 
+### คำสั่งสร้าง Index
+```sql
+CREATE INDEX IF NOT EXISTS idx_requests_status ON requests(status);
+CREATE INDEX IF NOT EXISTS idx_requests_requester ON requests(requester_id);
+การวัดผลด้วย EXPLAIN QUERY PLAN
+๑ ก่อนมี Index
+คำสั่งทดสอบ: EXPLAIN QUERY PLAN SELECT * FROM requests WHERE status = 'pending';
+
+ผลที่ได้: SCAN requests
+
+เพราะ: ระบบยังไม่มี Index จึงต้องกวาดอ่านข้อมูลทั้งตารางทีละแถวตั้งแต่ต้นจนจบ (Table Scan) ทำให้กินทรัพยากรและทำงานช้าเมื่อมีข้อมูลจำนวนมาก
+
+๒ หลังมี Index
+คำสั่งทดสอบ: EXPLAIN QUERY PLAN SELECT * FROM requests WHERE status = 'pending';
+
+ผลที่ได้: SEARCH requests USING INDEX idx_requests_status (status=?)
+
+เพราะ: ระบบสามารถวิ่งไปค้นหาตำแหน่งของข้อมูลเป้าหมายผ่าน Index ได้โดยตรง (Index Seek) ไม่ต้องเสียเวลาสแกนทั้งตาราง ทำให้ประมวลผลได้รวดเร็วขึ้นอย่างมาก
