@@ -4,7 +4,6 @@
   "version": "0.3.0",
   "type": "module",
   "scripts": {
-    "start": "node index.js",
     "dev": "vite",
     "check": "node scripts/check-project.mjs",
     "build": "vite build",
