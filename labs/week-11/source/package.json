@@ -6,6 +6,8 @@
     "node": ">=22.13.0"
   },
   "scripts": {
+    "build": "echo 'No build required'",
+    "start": "node index.js",
     "check": "node --disable-warning=ExperimentalWarning check-week11.mjs"
   },
   "devDependencies": {
