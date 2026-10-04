@@ -20,20 +20,9 @@ export function createApp() {
 
   // ③ อ่าน JSON body
   app.use(express.json());
-  
 
-  if (config.isProd && existsSync(config.staticDir)) {
-    app.use(express.static(config.staticDir));
-    app.get(/^\/(?!api).*/, (req, res) =>
-      res.sendFile(path.join(config.staticDir, 'index.html')));
-  } else {
-    // ④ route
-    app.get('/', (req, res) => res.json({ message: 'API (dev) — หน้าเว็บอยู่ที่พอร์ต 5173' }));
-  }
-  app.get('/api', (req, res) => res.json({ message: 'Campus Service API is running' }));
-  app.use('/api/health', healthRoutes);
-  app.use('/api/requests', requestRoutes);
-  app.use('/api/users', userRoutes);
+
+
 
   /**
    * 🏫 TODO W11-STATIC (CP39) · ทำให้ production เปิด URL เดียวได้ทั้งเว็บและ API
@@ -46,6 +35,18 @@ export function createApp() {
    *      → ย้ายข้อความต้อนรับไปไว้ที่ /api และให้ '/' ตอบ JSON เฉพาะตอน dev
    *      (ไม่งั้นผู้ใช้เปิด URL บน cloud แล้วจะเห็น JSON แทนหน้าเว็บ)
    */
+  app.get('/api', (req, res) => res.json({ message: 'Campus Service API is running' }));
+  app.use('/api/health', healthRoutes);
+  app.use('/api/requests', requestRoutes);
+  app.use('/api/users', userRoutes);
+
+  if (config.isProd && existsSync(config.staticDir)) {
+    app.use(express.static(config.staticDir));
+    app.get(/^\/(?!api).*/, (req, res) =>
+      res.sendFile(path.join(config.staticDir, 'index.html')));
+  } else {
+    app.get('/', (req, res) => res.json({ message: 'API (dev) — หน้าเว็บอยู่ที่พอร์ต 5173' }));
+  }
 
   // ⑥ ปิดท้าย
   app.use(notFound);
