@@ -1,0 +1,11 @@
+{
+  "week": "week-11",
+  "title": "Full-Stack Integration (Campus Service)",
+  "status": "ready",
+  "originalRepoUrl": "https://github.com/Kitsanapong-F/engse203-student-labs-68543210001/tree/lab/week-11",
+  "originalCommit": "24a03b1",
+  "pullRequestUrl": "",
+  "submissionTag": "lab-11-submission-v1",
+  "testStatus": "pass",
+  "notes": "ระบบ React + Express + SQLite deploy บน Render"
+}
