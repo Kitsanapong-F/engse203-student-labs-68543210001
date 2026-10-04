@@ -133,5 +133,20 @@
     "sourceUrl": "https://github.com/Kitsanapong-F/engse203-student-labs-68543210001/tree/lab/week-10/labs/week-10/source",
     "hasPublish": true,
     "sourceEntries": 7
+  },
+  {
+    "week": "week-11",
+    "title": "Full-Stack Integration (Campus Service)",
+    "status": "submitted",
+    "originalRepoUrl": "https://github.com/Kitsanapong-F/engse203-student-labs-68543210001/tree/lab/week-11",
+    "originalCommit": "24a03b1",
+    "pullRequestUrl": "https://github.com/Kitsanapong-F/engse203-student-labs-68543210001/pull/20",
+    "submissionTag": "lab-11-submission-v1",
+    "testStatus": "pass",
+    "notes": "ระบบ React + Express + SQLite deploy บน Render",
+    "pageUrl": "https://Kitsanapong-F.github.io/engse203-student-labs-68543210001/labs/week-11/",
+    "sourceUrl": "https://github.com/Kitsanapong-F/engse203-student-labs-68543210001/tree/lab/week-11/labs/week-11/source",
+    "hasPublish": true,
+    "sourceEntries": 14
   }
 ]
