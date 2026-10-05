@@ -29,21 +29,35 @@ describe('validateRequestInput — รายละเอียด (ค่าข�
   test('9 ตัวอักษร → error (ต่ำกว่าขอบ 1)', () => {
     expect(validateRequestInput(withField({ details: '123456789' }))).toHaveLength(1);
   });
-  test('10 ตัวอักษร → ผ่าน (ตรงขอบพอดี)', () => {
-    expect(validateRequestInput(withField({ details: '1234567890' }))).toEqual([]);
-  });
-  test('11 ตัวอักษร → ผ่าน (เกินขอบ 1)', () => {
-    expect(validateRequestInput(withField({ details: '12345678901' }))).toEqual([]);
-  });
-  test('ช่องว่างล้วนถูกตัดทิ้งก่อนนับ → error', () => {
-    expect(validateRequestInput(withField({ details: '            ' }))).toHaveLength(1);
-  });
+
   // 🏫 TODO W12-UNIT (CP45): เพิ่มกรณีจากตาราง TEST_CASES.md ให้ครบ
   //   - 10 ตัวอักษรพอดี → ผ่าน          ← ค่าขอบ
   //   - 11 ตัวอักษร → ผ่าน
   //   - ช่องว่างล้วน → error
   //   ⚠ ถ้า test ข้อไหน fail อย่าเพิ่งแก้ test — อ่านโค้ดใน validator ก่อน
+  test('10 ตัวอักษร → ผ่าน', () => {
+    expect(validateRequestInput(withField({ details: '1234567890' }))).toEqual([]);
+  });
+
+  test('11 ตัวอักษร → ผ่าน (เกินขอบ 1)', () => {
+    expect(validateRequestInput(withField({ details: '12345678901' }))).toEqual([]);
+  });
+
+  test('ช่องว่างล้วนถูกตัดทิ้งก่อนนับ → error', () => {
+    expect(validateRequestInput(withField({ details: '            ' }))).toHaveLength(1);
+  });
 });
+
+describe('isValidStatus', () => {
+  test.each(['pending', 'in-progress', 'completed'])('"%s" → true', (s) => {
+    expect(isValidStatus(s)).toBe(true);
+  });
+  
+  test.each(['done', 'in progress', '', undefined])('%j → false', (s) => {
+    expect(isValidStatus(s)).toBe(false);
+  });
+});
+
 
 // 🏫 TODO W12-UNIT (CP45): เพิ่ม describe อื่น ๆ
 //   - ชื่อผู้แจ้ง 1 ตัว / 2 ตัว
@@ -66,16 +80,8 @@ describe('validateRequestInput — ข้อมูลผิดรูปแบบ
   test('ผิดหลายช่องพร้อมกัน → ได้ error ครบทุกช่อง', () => {
     expect(validateRequestInput({})).toHaveLength(5);
   });
-});
 
-describe('isValidStatus', () => {
-  test('"pending" → true', () => {
-    expect(isValidStatus('pending')).toBe(true);
-  });
-    test.each(['pending', 'in-progress', 'completed'])('"%s" → true', (s) => {
-    expect(isValidStatus(s)).toBe(true);
-  });
-  test.each(['done', 'in progress', '', undefined])('%j → false', (s) => {
-    expect(isValidStatus(s)).toBe(false);
-  });
+  test.each(['เเจ้งซ่อม, ขอใช้ห้อง, บริการบัญชีผู้ใช้']), (requestType) => {
+    expect(validateRequestInput(requestType)).toEqual([]);
+  };
 });
