@@ -76,6 +76,26 @@ describe('POST /api/requests', () => {
 //   - PUT สถานะนอกรายการ → 400
 //   - DELETE แล้ว GET ซ้ำ → 404
 //   แล้วรัน npm run coverage → ดูว่าไฟล์ไหน/บรรทัดไหนยังไม่มี test วิ่งผ่าน
+describe('PUT /api/requests/:id', () => {
+  test('เปลี่ยนสถานะ → 200 และค่าใหม่ถูกบันทึก', async () => {
+    const r = await request(app).put('/api/requests/REQ-001').send({ status: 'completed' });
+    expect(r.status).toBe(200);
+    expect(r.body.status).toBe('completed');
+  });
+  test('สถานะนอกรายการ → 400', async () => {
+    const r = await request(app).put('/api/requests/REQ-001').send({ status: 'done' });
+    expect(r.status).toBe(400);
+  });
+});
 
+describe('DELETE /api/requests/:id', () => {
+  test('ลบแล้ว GET ซ้ำ → 404', async () => {
+    await request(app).delete('/api/requests/REQ-003').expect(204);
+    await request(app).get('/api/requests/REQ-003').expect(404);
+  });
+  test('ลบรายการที่ไม่มี → 404', async () => {
+    await request(app).delete('/api/requests/REQ-999').expect(404);
+  });
+});
 // 🏫 TODO W12-DEBUG (CP47): regression test ของ bug จาก BUG_REPORTS.md
 //   เขียน test ที่ "ทำซ้ำอาการ" ก่อน → ต้อง fail → แก้โค้ด → test ผ่าน
