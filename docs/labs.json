@@ -78,9 +78,9 @@
     "week": "week-06",
     "title": "Node.js / Express API Foundation",
     "status": "submitted",
-    "originalRepoUrl": "https://github.com/Kitsanapong-F/engse203-student-labs-68543210001/tree/lab/week-06",
-    "originalCommit": "eb0d82b",
-    "pullRequestUrl": "https://github.com/Kitsanapong-F/engse203-student-labs-68543210001/pull/11",
+    "originalRepoUrl": "https://github.com/Kitsanapong-F/engse203-student-labs-68543210001/tree/unit3/week-06",
+    "originalCommit": "272be76",
+    "pullRequestUrl": "",
     "submissionTag": "lab-06-submission-v1",
     "testStatus": "pass",
     "notes": "RESTful API ด้วย Express และ Challenge ครบถ้วน (28/28 รายการ)",
@@ -148,5 +148,20 @@
     "sourceUrl": "https://github.com/Kitsanapong-F/engse203-student-labs-68543210001/tree/lab/week-11/labs/week-11/source",
     "hasPublish": true,
     "sourceEntries": 14
+  },
+  {
+    "week": "week-12",
+    "title": "Week 12 Lab",
+    "status": "redyready",
+    "originalRepoUrl": "https://github.com/Kitsanapong-F/engse203-student-labs-68543210001",
+    "originalCommit": "HEAD",
+    "pullRequestUrl": "",
+    "submissionTag": "lab-12-submission-v1",
+    "testStatus": "pending",
+    "notes": "placeholder",
+    "pageUrl": "https://Kitsanapong-F.github.io/engse203-student-labs-68543210001/labs/week-12/",
+    "sourceUrl": "https://github.com/Kitsanapong-F/engse203-student-labs-68543210001/tree/lab/week-12/labs/week-12/source",
+    "hasPublish": false,
+    "sourceEntries": 2
   }
 ]
