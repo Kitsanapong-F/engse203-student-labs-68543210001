@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/9</span>
+                <span class='fraction'>9/9</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">81.81% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/11</span>
+                <span class='fraction'>9/11</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/5</span>
+                <span class='fraction'>5/5</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/8</span>
+                <span class='fraction'>8/8</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -106,8 +106,8 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -116,24 +116,24 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -143,9 +143,9 @@
 &nbsp;
 /** error ที่เรารู้สาเหตุและอยากกำหนด status เอง */
 export class AppError extends Error {
-<span class="fstat-no" title="function not covered" >  constructor(</span>message, status = <span class="branch-0 cbranch-no" title="branch not covered" >500)</span> {
-<span class="cstat-no" title="statement not covered" >    super(message);</span>
-<span class="cstat-no" title="statement not covered" >    this.status = status;</span>
+  constructor(message, status = 500) {
+    super(message);
+    this.status = status;
   }
 }
 &nbsp;
@@ -153,28 +153,28 @@ export class AppError extends Error {
  * ห่อ handler ที่เป็น async เพื่อให้ error ที่เกิดข้างในถูกส่งไป errorHandler
  * ถ้าไม่ห่อ Express 5 จะจับได้แต่ Express 4 จะเงียบไปเลย
  */
-export function <span class="fstat-no" title="function not covered" >asyncHandler(</span>fn) {
-<span class="cstat-no" title="statement not covered" >  return <span class="fstat-no" title="function not covered" >(r</span>eq, res, next) =&gt; <span class="cstat-no" title="statement not covered" >Promise.resolve(fn(req, res, next)).catch(next);</span></span>
+export function asyncHandler(fn) {
+  return (req, res, next) =&gt; Promise.resolve(fn(req, res, next)).catch(next);
 }
 &nbsp;
 /** ไม่มี route ไหนตรงกับคำขอ */
-export function <span class="fstat-no" title="function not covered" >notFound(</span>req, res) {
-<span class="cstat-no" title="statement not covered" >  res.status(404).json({ error: `ไม่พบเส้นทาง ${req.method} ${req.originalUrl}` });</span>
+export function notFound(req, res) {
+  res.status(404).json({ error: `ไม่พบเส้นทาง ${req.method} ${req.originalUrl}` });
 }
 &nbsp;
 /** จับ error ที่หลุดมาจากทุก route — ต้องมี 4 พารามิเตอร์ */
-export function <span class="fstat-no" title="function not covered" >errorHandler(</span>err, req, res, next) {
-  const status = <span class="cstat-no" title="statement not covered" >err.status ?? 500;</span>
+export function errorHandler(err, req, res, next) {
+  const status = err.status ?? 500;
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  if (status &gt;= 500) {</span>
+  if (status &gt;= 500) {
     // dev แสดง stack เต็ม (บอกไฟล์และบรรทัดที่พัง) · production เก็บแค่ข้อความ
-<span class="cstat-no" title="statement not covered" >    console.error('เกิดข้อผิดพลาดภายใน:', config.isProd ? err.message : err.stack);</span>
+    console.error('เกิดข้อผิดพลาดภายใน:', config.isProd ? <span class="branch-0 cbranch-no" title="branch not covered" >err.message </span>: err.stack);
   }
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  res.status(status).json({</span>
+  res.status(status).json({
     error: status &gt;= 500 ? 'เกิดข้อผิดพลาดภายในเซิร์ฟเวอร์' : err.message,
     // ส่ง stack เฉพาะตอนพัฒนา — production ห้ามเปิดเผยโครงสร้างภายใน
-    ...(config.isProd ? {} : { stack: err.stack?.split('\n').slice(0, 3) }),
+    ...(config.isProd ? <span class="branch-0 cbranch-no" title="branch not covered" >{} </span>: { stack: err.stack?.split('\n').slice(0, 3) }),
   });
 }
 &nbsp;</pre></td></tr></table></pre>
@@ -184,7 +184,7 @@ export function <span class="fstat-no" title="function not covered" >errorHandle
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-10-05T05:04:57.343Z
+                at 2026-10-07T09:03:58.963Z
             </div>
         <script src="../../prettify.js"></script>
         <script>
