@@ -151,17 +151,17 @@
   },
   {
     "week": "week-12",
-    "title": "Week 12 Lab",
-    "status": "redyready",
-    "originalRepoUrl": "https://github.com/Kitsanapong-F/engse203-student-labs-68543210001",
-    "originalCommit": "HEAD",
+    "title": "Test Case,Unit Testing, Integration Testing & Debugging",
+    "status": "ready",
+    "originalRepoUrl": "https://github.com/Kitsanapong-F/engse203-student-labs-68543210001/tree/unit5/week-12",
+    "originalCommit": "7b5a27e",
     "pullRequestUrl": "",
     "submissionTag": "lab-12-submission-v1",
-    "testStatus": "pending",
-    "notes": "placeholder",
+    "testStatus": "pass",
+    "notes": "ครบถ้วน (22/22 รายการ)",
     "pageUrl": "https://Kitsanapong-F.github.io/engse203-student-labs-68543210001/labs/week-12/",
-    "sourceUrl": "https://github.com/Kitsanapong-F/engse203-student-labs-68543210001/tree/lab/week-12/labs/week-12/source",
-    "hasPublish": false,
-    "sourceEntries": 2
+    "sourceUrl": "https://github.com/Kitsanapong-F/engse203-student-labs-68543210001/tree/unit4/week-12/labs/week-12/source",
+    "hasPublish": true,
+    "sourceEntries": 17
   }
 ]
