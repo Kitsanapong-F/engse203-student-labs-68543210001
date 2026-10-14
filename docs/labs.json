@@ -85,7 +85,7 @@
     "testStatus": "pass",
     "notes": "RESTful API ด้วย Express และ Challenge ครบถ้วน (28/28 รายการ)",
     "pageUrl": "https://Kitsanapong-F.github.io/engse203-student-labs-68543210001/labs/week-06/",
-    "sourceUrl": "https://github.com/Kitsanapong-F/engse203-student-labs-68543210001/tree/unit3/week-06/labs/week-06/source",
+    "sourceUrl": "https://github.com/Kitsanapong-F/engse203-student-labs-68543210001/tree/lab/week-06/labs/week-06/source",
     "hasPublish": false,
     "sourceEntries": 6
   },
@@ -100,7 +100,7 @@
     "testStatus": "pass",
     "notes": "RESTful API, Validation & Error Handling ครบถ้วน (36/36 รายการ)",
     "pageUrl": "https://Kitsanapong-F.github.io/engse203-student-labs-68543210001/labs/week-07/",
-    "sourceUrl": "https://github.com/Kitsanapong-F/engse203-student-labs-68543210001/tree/unit3/week-07/labs/week-07/source",
+    "sourceUrl": "https://github.com/Kitsanapong-F/engse203-student-labs-68543210001/tree/lab/week-07/labs/week-07/source",
     "hasPublish": true,
     "sourceEntries": 6
   },
@@ -108,14 +108,14 @@
     "week": "week-09",
     "title": "sql-fundamentals",
     "status": "submitted",
-    "originalRepoUrl": "https://github.com/Kitsanapong-F/engse203-student-labs-68543210001/tree/unit4/week-09/labs",
+    "originalRepoUrl": "https://github.com/Kitsanapong-F/engse203-student-labs-68543210001/tree/lab/week-09/labs",
     "originalCommit": "47c1d4b",
     "pullRequestUrl": "https://github.com/Kitsanapong-F/engse203-student-labs-68543210001/pull/24",
     "submissionTag": "lab-09-submission-v1",
     "testStatus": "pass",
     "notes": "sql-fundamentals ครบถ้วน (30/30 รายการ)",
     "pageUrl": "https://Kitsanapong-F.github.io/engse203-student-labs-68543210001/labs/week-09/",
-    "sourceUrl": "https://github.com/Kitsanapong-F/engse203-student-labs-68543210001/tree/unit4/week-09/labs/week-09/source",
+    "sourceUrl": "https://github.com/Kitsanapong-F/engse203-student-labs-68543210001/tree/lab/week-09/labs/week-09/source",
     "hasPublish": false,
     "sourceEntries": 6
   },
@@ -130,7 +130,7 @@
     "testStatus": "pass",
     "notes": "Node.js Database ครบถ้วน (31/31 รายการ)",
     "pageUrl": "https://Kitsanapong-F.github.io/engse203-student-labs-68543210001/labs/week-10/",
-    "sourceUrl": "https://github.com/Kitsanapong-F/engse203-student-labs-68543210001/tree/unit4/week-10/labs/week-10/source",
+    "sourceUrl": "https://github.com/Kitsanapong-F/engse203-student-labs-68543210001/tree/lab/week-10/labs/week-10/source",
     "hasPublish": true,
     "sourceEntries": 7
   },
@@ -145,7 +145,7 @@
     "testStatus": "pass",
     "notes": "ระบบ React + Express + SQLite deploy บน Render",
     "pageUrl": "https://Kitsanapong-F.github.io/engse203-student-labs-68543210001/labs/week-11/",
-    "sourceUrl": "https://github.com/Kitsanapong-F/engse203-student-labs-68543210001/tree/unit4/week-11/labs/week-11/source",
+    "sourceUrl": "https://github.com/Kitsanapong-F/engse203-student-labs-68543210001/tree/lab/week-11/labs/week-11/source",
     "hasPublish": true,
     "sourceEntries": 14
   },
@@ -167,16 +167,16 @@
   {
     "week": "week-13",
     "title": "Quality-Security",
-    "status": "ready",
+    "status": "submitted",
     "originalRepoUrl": "https://github.com/Kitsanapong-F/engse203-student-labs-68543210001/tree/unit5/week-13",
     "originalCommit": "d1b06dd",
-    "pullRequestUrl": "",
+    "pullRequestUrl": "https://github.com/Kitsanapong-F/engse203-student-labs-68543210001/pull/31",
     "submissionTag": "lab-13-submission-v1",
     "testStatus": "pass",
     "notes": "ครบถ้วน (27/27 รายการ)",
     "pageUrl": "https://Kitsanapong-F.github.io/engse203-student-labs-68543210001/labs/week-13/",
-    "sourceUrl": "https://github.com/Kitsanapong-F/engse203-student-labs-68543210001/tree/lab/week-13/labs/week-13/source",
-    "hasPublish": false,
+    "sourceUrl": "https://github.com/Kitsanapong-F/engse203-student-labs-68543210001/tree/unit5/week-13/labs/week-13/source",
+    "hasPublish": true,
     "sourceEntries": 18
   }
 ]
