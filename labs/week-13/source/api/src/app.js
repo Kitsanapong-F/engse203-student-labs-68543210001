@@ -22,8 +22,13 @@ export function createApp() {
   if (config.env !== 'test') app.use(morgan(config.isProd ? 'combined' : 'dev'));
 
   // ③ อ่าน JSON body
-  // 🏫 TODO W13-VALID (CP48): จำกัดขนาด body ไม่เกิน 10kb → express.json({ limit: '10kb' })
- app.use(express.json({ limit: '10kb' }));// เกิน → 413
+  app.use(express.json({ limit: '10kb' })); // เกิน → 413
+
+  // security headers
+  app.use((req, res, next) => {
+    res.set('X-Content-Type-Options', 'nosniff');
+    next();
+  });
 
   // ④ route ของ API — ทุกอย่างอยู่ใต้ /api
   app.get('/api', (req, res) => {

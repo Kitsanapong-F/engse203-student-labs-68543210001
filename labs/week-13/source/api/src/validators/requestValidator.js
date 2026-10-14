@@ -39,22 +39,6 @@ export function validateRequestInput(input) {
     checkText(input.details, 'รายละเอียด', { min: MIN_DETAILS, max: MAX_DETAILS }),
     PRIORITIES.includes(input.priority) ? null : 'ความเร่งด่วนต้องเป็น normal หรือ urgent',
   ];
-  
-  if (readText(input.requesterName).length < MIN_NAME) {
-    errors.push(`ชื่อผู้แจ้งต้องมีอย่างน้อย ${MIN_NAME} ตัวอักษร`);
-  }
-  if (!REQUEST_TYPES.includes(input.requestType)) {
-    errors.push('ประเภทคำร้องไม่ถูกต้อง');
-  }
-  if (!readText(input.location)) {
-    errors.push('กรุณาระบุสถานที่');
-  }
-  if (readText(input.details).length < MIN_DETAILS) {
-    errors.push(`รายละเอียดต้องมีอย่างน้อย ${MIN_DETAILS} ตัวอักษร`);
-  }
-  if (!PRIORITIES.includes(input.priority)) {
-    errors.push('ความเร่งด่วนต้องเป็น normal หรือ urgent');
-  }
   return errors.filter(Boolean);
 }
 
@@ -83,3 +67,6 @@ function checkText(value, label, { min = 1, max }) {
   if (length > max) return `${label}ต้องไม่เกิน ${max} ตัวอักษร`;
   return null;
 }
+
+
+

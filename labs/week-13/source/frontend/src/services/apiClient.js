@@ -23,6 +23,12 @@ async function parseError(response) {
   }
 }
 
+export function buildHeaders(customHeaders = {}) {
+  const token = typeof localStorage !== 'undefined' ? localStorage.getItem('token') : null;
+  const authHeader = token ? { Authorization: `Bearer ${token}` } : {};
+  return { 'Content-Type': 'application/json', ...authHeader, ...customHeaders };
+}
+
 /**
  * เรียก API แล้วคืนข้อมูลที่ parse แล้ว
  * - ตอบ 2xx → คืนข้อมูล (204 คืน null เพราะไม่มี body)
@@ -33,7 +39,7 @@ export async function apiFetch(path, options = {}) {
   let response;
   try {
     response = await fetch(`${BASE_URL}${path}`, {
-      headers: { 'Content-Type': 'application/json', ...options.headers },
+      headers: buildHeaders(options.headers),
       ...options,
     });
   } catch {

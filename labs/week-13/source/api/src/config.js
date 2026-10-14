@@ -37,6 +37,15 @@ export const config = {
    *   แก้: production ที่ไม่มี JWT_SECRET ต้อง throw new Error(...) ทันที (fail fast)
    *        dev/test ยังใช้ค่าสำหรับพัฒนาได้
    */
-  jwtSecret: process.env.JWT_SECRET || 'dev-only-secret-do-not-use-in-production',
+  jwtSecret: (() => {
+    if (process.env.NODE_ENV === 'production') {
+      if (!process.env.JWT_SECRET || process.env.JWT_SECRET.trim() === '') {
+        throw new Error('JWT_SECRET is required in production mode');
+      }
+      return process.env.JWT_SECRET;
+    }
+    return process.env.JWT_SECRET || 'dev-only-secret-do-not-use-in-production';
+  })(),
   jwtExpiresIn: process.env.JWT_EXPIRES_IN ?? '2h',
 };
+
