@@ -30,11 +30,22 @@ for (const week of labs) {
   const hasPublish = await exists(path.join(publishRoot, "index.html"));
   await fs.mkdir(target, { recursive: true });
 
+  const branchMap = {
+    "week-06": "unit3/week-06",
+    "week-07": "unit3/week-07",
+    "week-09": "unit4/week-09",
+    "week-10": "unit4/week-10",
+    "week-11": "unit4/week-11",
+    "week-12": "unit5/week-12",
+    "week-13": "unit5/week-13",
+  };
+  const branch = branchMap[week] ?? `lab/${week}`;
+  const sourceUrl = `${repoUrl}/tree/${branch}/labs/${week}/source`;
+  const evidenceUrl = `${repoUrl}/tree/${branch}/labs/${week}/evidence`;
+
   if (hasPublish) {
     await fs.cp(publishRoot, target, { recursive: true });
   } else {
-    const sourceUrl = `${repoUrl}/tree/lab/${week}/labs/${week}/source`;
-    const evidenceUrl = `${repoUrl}/tree/lab/${week}/labs/${week}/evidence`;
     const originalUrl = validHttpUrl(metadata.originalRepoUrl);
     const report = `<!doctype html>
 <html lang="th"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
@@ -47,8 +58,6 @@ for (const week of labs) {
 <p style="margin-top:22px;color:#52677c">${escapeHtml(metadata.notes || "")}</p></main></body></html>`;
     await fs.writeFile(path.join(target, "index.html"), report, "utf8");
   }
-
-  const sourceUrl = `${repoUrl}/tree/lab/${week}/labs/${week}/source`;
   const prUrl = validHttpUrl(metadata.pullRequestUrl);
   const pageUrl = `${pagesBase}/labs/${week}/`;
   const sourceCount = (await meaningfulEntries(path.join(labRoot, "source"))).length;
